@@ -1,0 +1,23 @@
+#
+import urllib.request
+url='https://www.baidu.com/s?wd=ip'
+headers={
+    'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.57'
+}
+#请求对象的定制
+request=urllib.request.Request(url=url,headers=headers)
+#handler build_opener open
+    #代理ip,用快代理网站
+proxies={
+'http':'118.24.219.151:16817'
+}
+handler=urllib.request.ProxyHandler(proxies=proxies)
+opener=urllib.request.build_opener(handler)
+response=opener.open(request)
+#模拟浏览器向服务器发送请求
+# response=urllib.request.urlopen(request)
+#获取响应的信息
+content=response.read().decode('utf-8')
+#保存
+with open('daili.html', 'w', encoding='utf-8') as fp:
+    fp.write(content)
